@@ -14,6 +14,15 @@ dehydrated:
     ca: https://acme-v01.api.letsencrypt.org/directory
     openssl-cnf: /usr/lib/ssl/openssl.cnf
     # see dehydrated/files/config.sh for more
+
+  # overwrite configuration options on a per domain basis. Not all options are
+  # supported. See the dehydrated docs/per-certificate-config.md
+  domain-config:
+
+    # Domains are identified by their first SAN (or alias if set)
+    example.com:
+      key-algo: secp384r1
+
   # Override formula parameters
   lookup:
     pkg: dehydrated
