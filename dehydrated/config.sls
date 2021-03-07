@@ -38,3 +38,14 @@ dehydrated-domains:
     - user: {{ dehydrated.user }}
     - group: {{ dehydrated.group }}
     - template: jinja
+
+{% for alias, config in dehydrated.get('domain-config', {}) %}
+dehydrated-domain-config-{{alias}}:
+  file.managed:
+    - name: {{ dehydrated.get('config', {}).get('basedir', '/var/lib/dehydrated') ~ '/' alias ~ '/config' }}
+    - source: salt://dehydrated/files/config
+    - mode: 644
+    - user: {{ dehydrated.user }}
+    - group: {{ dehydrated.group }}
+    - template: jinja
+{% endfor %}
